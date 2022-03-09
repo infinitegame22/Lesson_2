@@ -1,3 +1,22 @@
+LANGUAGE = 'en'
+
+require 'yaml'
+MESSAGES = YAML.load_file('calculator_messages.yml')
+
+def messages(message, lang='en')
+  MESSAGES[lang][message]
+end
+
+MESSAGES['es']['welcome']
+
+def integer?(input)
+  input.to_i.to_s == input
+end
+
+def float?(input)
+  input.to_f.to_s == input
+end
+
 def prompt(message)
   Kernel.puts("=> #{message}")
 end
@@ -6,20 +25,24 @@ def valid_number?(num)
   num.to_i.is_a? Integer
 end
 
-def operation_to_message(opt)
-  case opt
-  when '1'
-    'Adding'
-  when '2'
-    'Subtracting'
-  when '3'
-    'Multiplying'
-  when '4'
-    'Dividing'
-  end
+def operation_to_message(operation)
+  word = case operation
+          when '1'
+            'Adding'
+          when '2'
+            'Subtracting'
+          when '3'
+            'Multiplying'
+          when '4'
+            'Dividing'
+        end
+
+  x = "A random line of code"
+
+  word
 end
 
-prompt('Welcome to Calculator! Enter your name:')
+prompt(MESSAGES['welcome'])
 
 name = ''
 loop do

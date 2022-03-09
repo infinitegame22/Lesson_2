@@ -14,3 +14,23 @@ end
 def integer?(input)
   Integer(input) rescue false
 end
+
+#option 1
+def number?(input)
+  integer?(input) || float?(input)
+end
+
+# Option 1 - easiest way
+def float?(input)
+  input.to_f.to_s == input
+end
+
+# Option 2
+def float?(input)
+  /\d/.match(input) && /^-?\d*\.?\d*$/.match(input)
+end
+
+# Option 3
+def float?(input)
+  Float(input) rescue false
+end
